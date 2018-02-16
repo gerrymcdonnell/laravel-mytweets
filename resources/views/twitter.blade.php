@@ -36,6 +36,12 @@
                     <i class="glyphicon glyphicon-repeat">{{$tweet['retweet_count']}}</i>
                 </h3>
 
+                @if(!empty($tweet['extended_entities']['media']))
+                    @foreach($tweet['extended_entities']['media'] as $i)
+                        <img src="{{$i['media_url_https']}}" style="width:100px"/>
+                    @endforeach
+                @endif
+
             </div>
 
             <hr>
