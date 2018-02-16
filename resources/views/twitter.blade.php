@@ -26,6 +26,38 @@
     </nav>
 
     <div class="container">
+    
+    <form class="well" action="{{route('post.tweet')}}" method="post" enctype="multipart/form-data">
+
+        {{csrf_field()}}
+
+        @if(count($errors)>0)
+            @foreach($errors->all() as $error)
+                <div class="alert alert-danger">
+                {{$error}}
+                </div>
+            @endforeach
+        @endif
+
+        <div class="form-group">
+            <label>tweet text </label>
+            <input type="text" name="tweet" class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <label>upload </label>
+            <input type="file" name="images[]" class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-success">send</button>
+        </div>
+
+    </form>
+    
+    
+    
+    
     @if(!empty($data))
         @foreach($data as $key=>$tweet)
 
@@ -38,7 +70,9 @@
 
                 @if(!empty($tweet['extended_entities']['media']))
                     @foreach($tweet['extended_entities']['media'] as $i)
-                        <img src="{{$i['media_url_https']}}" style="width:100px"/>
+                        <a href="{{$i['media_url_https']}}">
+                         <img src="{{$i['media_url_https']}}" style="width:200px"/>
+                        </a>
                     @endforeach
                 @endif
 
